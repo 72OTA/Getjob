@@ -1,0 +1,43 @@
+{% extends 'overall/layout' %}
+{% block appBody %}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <a class="navbar-brand" href="#">GetJob</a>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4" style=" border-radius:10px">
+        <div class="card card-container" >
+        <h1 class="text-center" style="color:white;">Iniciar Sesion</h1>
+        
+       
+          <p id="profile-name" class="profile-name-card"></p>
+          <form class="form-signin bounce" id="login_form" method="POST">
+            <input type="rut" name="rut" class="form-control" placeholder="rut" autofocus="autofocus">
+            <input type="password" name="pass" class="form-control" placeholder="Password" autocomplete="autocomplete">
+            <div id="remember" class="checkbox">
+            
+            </div>
+            <button type="button" class="btn btn-lg btn-success btn-block btn-signin" id="login">INICIAR</button>
+            <button type="button" class="btn btn-lg btn-primary btn-block btn-signin" data-toggle="modal" data-target="#lostpass">REGISTRAR</button>
+          </form>
+          <!-- /form -->
+        </div>
+      </div>
+    </div>
+
+    <!-- /card-container -->
+  </div>
+  <!-- /container -->
+  {% block appScript %}
+    <script src="views/app/js/login/login.js"></script>
+    <script src="views/app/js/main.js"></script>
+   
+  {% endblock %}
+
+{% endblock %}
