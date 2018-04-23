@@ -1,0 +1,55 @@
+{% extends 'overall/layout' %}
+{% block appHeader %}
+    <style>
+        body {
+            background: linear-gradient(rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url("./views/app/images/bgev.jpg");
+            background-size: 100% 100%;
+            background-color: black;
+        }
+
+        .col-sm-4 {
+            border-radius: 25px;
+            background: linear-gradient(rgba(20, 20, 20, .5), rgba(20, 20, 20, .5));
+        }
+    </style>
+
+</script>
+{% endblock %}
+{% block appBody %}
+<div class="row">
+    {% if evento.nombre != 'No hay datos' %}
+        {% for d in evento %}
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Evento:
+                            {{d.nombre}}
+                        </h3>
+                        <h4 class="card-subtitle mb-2 text-muted">Personal:
+                            {{d.funcion}}
+                        </h4>
+                        <p class="card-text text-muted">Fecha:
+                            {{d.fecha}}
+                        </p>
+                        {% if d.fecha >= fecha %}
+                            <div class="text-center">
+                                <a href="eventos/editar_evento/{{ d.id }}" class="btn btn-primary">EDITAR EVENTO</a>
+                                <a href="eventos/verEvento" class="btn btn-danger">VER EVENTO</a>
+                            </div>
+                        {% else %}
+                            <div class="text-center">
+                                <a href="eventos/verEvento" class="btn btn-danger">VER EVENTO</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center">
+            <h1>sin datos</h1>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

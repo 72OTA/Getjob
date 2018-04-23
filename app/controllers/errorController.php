@@ -15,7 +15,7 @@ use app\models as Model;
 use Ocrend\Kernel\Router\IRouter;
 use Ocrend\Kernel\Controllers\Controllers;
 use Ocrend\Kernel\Controllers\IControllers;
-  
+
 /**
  * Controlador error/
  *
@@ -26,7 +26,11 @@ class errorController extends Controllers implements IControllers {
 
     public function __construct(IRouter $router) {
         parent::__construct($router);
-        echo $this->template->render('error/error');
+        if (!isset($this->user['id_user']))
+            echo $this->template->render('error/error');
+        else{
+            echo $this->template->render('error/error',array());
+        }
     }
 
 }

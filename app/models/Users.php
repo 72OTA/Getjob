@@ -79,22 +79,19 @@ class Users extends Models implements IModels {
     }
 
     /**
-     * Verifica el email introducido, tanto el formato como su existencia en el sistema
+     * Verifica el rut introducido, tanto el formato como su existencia en el sistema
      *
-     * @param string $rut: Email del usuario
+     * @param string $rut: Rut del trabajador
      *
-     * @throws ModelsException en caso de que no tenga formato válido o ya exista
      */
-    private function checkEmail(string $rut) {
-        # Formato de email
-        if ($rut == false) {
-            throw new ModelsException('El rut no tiene un formato válido.');
-        }
+    private function checkRut(string $rut,string $id_user='0') {
         # Existencia de email
-        $rut = $this->db->scape($rut);
-        $query = $this->db->select('id_user', 'users', "rut='$rut'", 'LIMIT 1');
-        if (false !== $query) {
-            throw new ModelsException('El rut introducido ya existe.');
+        if ($rut != '0' ){
+          $rut = $this->db->scape($rut);
+          $query = $this->db->select('rut', 'users', "rut='$rut' and id_user<>$id_user", 'LIMIT 1');
+          if (false !== $query) {
+              throw new ModelsException('El Rut introducido ya se encuentra asignado.');
+          }
         }
     }
 
@@ -144,7 +141,7 @@ class Users extends Models implements IModels {
         $query = $this->db->select('id_user,pass','users',"rut='$rut'",'LIMIT 1');
 
         # Incio de sesión con éxito
-        if(false !== $query && $query[0]['pass'] == $pass) {
+        if(false !== $query && Strings::chash($query[0]['pass'],$pass)) {
 
             # Restaurar intentos
             $this->restoreAttempts($rut);
@@ -268,16 +265,17 @@ class Users extends Models implements IModels {
             # Obtener los datos $_POST
             $name = $http->request->get('name');
             $rut = $http->request->get('rut');
+            $mail = $http->request->get('mail');
             $pass = $http->request->get('pass');
             $pass_repeat = $http->request->get('pass_repeat');
 
             # Verificar que no están vacíos
-            if ($this->functions->e($name, $rut, $pass, $pass_repeat)) {
+            if ($this->functions->e($name, $rut, $pass, $pass_repeat,$mail)) {
                 throw new ModelsException('Todos los datos son necesarios');
             }
 
             # Verificar rut
-            $this->checkEmail($rut);
+           $this->checkRut($rut);
 
             # Veriricar contraseñas
             $this->checkPassMatch($pass, $pass_repeat);
@@ -286,6 +284,7 @@ class Users extends Models implements IModels {
             $this->db->insert('users', array(
                 'name' => $name,
                 'rut' => $rut,
+                'email' => $mail,
                 'pass' => Strings::hash($pass)
             ));
 
@@ -429,7 +428,9 @@ class Users extends Models implements IModels {
     public function getUsers(string $select = '*') {
         return $this->db->select($select,'users');
     }
-
+    public function getComunas(string $select = '*') {
+        return $this->db->select($select,'comunas');
+    }
     /**
      * Obtiene datos del usuario conectado actualmente
      *
@@ -453,6 +454,87 @@ class Users extends Models implements IModels {
 
         throw new \RuntimeException('El usuario no está logeado.');
     }
+
+    public function traer_datos(): array {
+        try {
+            global $http;
+
+            #Obtener los datos $_POST
+            $id = $http->request->get('id');
+
+           $datos = $this->db->query_select("SELECT * FROM users WHERE id_user=$id");
+            //
+            return array('success' => 1, 'datos' => $datos);
+        }catch (ModelsException $e) {
+            return array('success' => 0, 'message' => $e->getMessage());
+        }
+    }
+
+    public function resetpass() : array {
+        try {
+            global $http;
+
+            # Obtener los datos $_POST
+            $id_user = $this->id_user;
+            $pass = $http->request->get('pass');
+            $pass_repeat = $http->request->get('pass_repeat');
+
+            # Verificar que no están vacíos
+            if ($this->functions->e($pass, $pass_repeat)) {
+                throw new ModelsException('Todos los datos son necesarios');
+            }
+
+            # Veriricar contraseñas
+            $this->checkPassMatch($pass, $pass_repeat);
+
+            $pass = Strings::hash($pass);
+
+            # Actualiza contraseña
+            $this->db->query("UPDATE users SET pass='$pass', tmp_pass='', token=''
+            WHERE id_user='$id_user' LIMIT 1;");
+
+            return array('success' => 1, 'message' => 'Password actualizada con éxito.');
+        } catch (ModelsException $e) {
+            return array('success' => 0, 'message' => $e->getMessage());
+        }
+    }
+        public function actualizar() : array {
+        try {
+            global $http;
+
+            # Obtener los datos $_POST
+            $id_user = $this->id_user;
+            $name = $http->request->get('name');
+            $mail = $http->request->get('mail');
+            $n_telefono = $http->request->get('n_telefono');
+            $fecha_nacimiento = $http->request->get('fecha_nacimiento');
+            $comuna = $http->request->get('comuna');
+            $sexo = $http->request->get('sexo');
+            $bip = $http->request->get('bip');
+
+            # Verificar que no están vacíos
+            if ($this->functions->e($name, $mail)) {
+                throw new ModelsException('Todos los datos son necesarios');
+            }
+
+
+            # Actualiza usuario
+            $this->db->query("UPDATE users SET 
+            name='$name', 
+            email='$mail', 
+            n_telefono='$n_telefono',
+            fecha_nacimiento='$fecha_nacimiento',
+            comuna='$comuna',
+            sexo='$sexo',
+            bip='$bip'
+            WHERE id_user='$id_user' LIMIT 1;");
+
+            return array('success' => 1, 'message' => 'Datos actualizados con éxito.');
+        } catch (ModelsException $e) {
+            return array('success' => 0, 'message' => $e->getMessage());
+        }
+    }
+
 
     /**
      * Instala el módulo de usuarios en la base de datos para que pueda funcionar correctamete.

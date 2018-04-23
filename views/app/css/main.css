@@ -15,6 +15,15 @@
 		height: 100%;
 		overflow-x: hidden;
 		width: 100%;
+		
+	}
+	footer{
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		color: white;
+		text-align: center;
 	}
 
 
@@ -106,15 +115,35 @@
 		 -webkit-transition: all 0.3s linear;
 		 /*safari and chrome */
 	}
-
-		a:hover {
+				/* NUEVO ESTILO HOVER SOLO EN NAVBAR */
+		.navbar-default .navbar-nav>li>a:hover,
+		.navbar-default .navbar-nav>li>a:focus {
 			border-bottom-color: transparent;
 			color: #fff !important;
 			background-color: #4f5051 !important;
 			text-decoration: none;
 			font-size: 25px;
 		}
+		/* HOVER EN TODOS LOS A */
+		/* a:hover {
+			border-bottom-color: transparent;
+			color: #fff !important;
+			background-color: #4f5051 !important;
+			text-decoration: none;
+			font-size: 25px;
+		} */
+		/* NUEVO ESTILO NAVBAR PEQUEÑO */
 
+		/* .navbar-nav>li>a,
+		.navbar-brand {
+			padding-top: 4px !important;
+			padding-bottom: 0 !important;
+			height: 28px;
+		}
+
+		.navbar {
+			min-height: 28px !important;
+		} */
 
 	strong, b {
 		color: #fff;

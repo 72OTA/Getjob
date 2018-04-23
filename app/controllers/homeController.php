@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Ocrend Framewok 2 package.
+ * Este Archivo es parte del Framework Ocrend Moldeado Especialmente para esta StartUp(GetJob)
  *
- * (c) Ocrend Software <info@ocrend.com>
+ * (C) <f.andradevalenzuela@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,7 +19,7 @@ use Ocrend\Kernel\Controllers\IControllers;
 /**
  * Controlador home/
  *
- * @author Brayan Narváez <prinick@ocrend.com>
+ * @author Felipe Andrade <f.andradevalenzuela@gmail.com>
 */
 
 class homeController extends Controllers implements IControllers {
@@ -33,10 +33,11 @@ class homeController extends Controllers implements IControllers {
   else{
       //redirecciona a pagina de inicio de usuario
       echo $this->template->render('home/principal',array(
-          'usuario'=> (new Model\Users)->getOwnerUser(),
+          'user'=> (new Model\Users)->getOwnerUser(),
       ));
 
   }
+  
     }
 
 }

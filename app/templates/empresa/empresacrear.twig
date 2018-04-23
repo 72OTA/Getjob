@@ -1,0 +1,50 @@
+{% extends 'overall/layout' %}
+    {% block appHeader %}
+     <style>
+body {
+   background-image: url("./views/app/images/bg.jpg");
+   background-color: black;
+}
+     </style>
+
+</script>
+    {% endblock %}
+{% block appBody %}
+    <div class="card card-container" >
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+                <header class="masthead mb-auto">
+                    <div class="inner">
+                        <h3 class="masthead-brand text-center">Crear perfil empresa</h3>
+                    </div>
+                </header>
+            <main role="main" class="inner cover">
+                <h4>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <form id="crearempresa_form">
+                                <input type="hidden" name="rut" class="form-control" value="{{user.rut}}" >
+                                <br>
+                                RUT Empresa<input type="rute" name="rute" class="form-control" placeholder="Rut de la empresa" autofocus="autofocus" >
+                                <br>
+                                Nombre Empresa<input type="text" name="name" class="form-control" placeholder="Nombre de la empresa">
+                                <br>
+                                Rubro<input type="text" name="rubro" class="form-control" placeholder="Rubro">
+                                <br>
+                                <input type="hidden" name="id" id="id" value="{{user.id_user}}">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-lg btn-success  btn-signin" id="crearempresa">Crear Empresa</button>
+                                    <a type="button" class="btn btn-lg btn-primary  btn-signin" href="empresa/">Volver</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </h4>
+            </main>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

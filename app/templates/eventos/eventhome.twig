@@ -1,0 +1,16 @@
+                                  {% extends 'overall/layout' %}
+    {% block appHeader %}
+     <style>
+body {
+   background: linear-gradient(
+                     rgba(20,20,20, .5), 
+                     rgba(20,20,20, .5)),
+                     url("./views/app/images/bgevent.png");
+}
+     </style>
+    {% endblock %}
+{% block appBody %}
+                                    <a type="button" class="btn btn-lg btn-primary  btn-signin" href="eventos/crear">Crear Eventos</a>
+                                    <a type="button" class="btn btn-lg btn-danger  btn-signin" href="eventos/visualizar">Ver Eventos</a>
+
+{% endblock %}

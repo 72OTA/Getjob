@@ -1,43 +1,82 @@
 {% extends 'overall/layout' %}
+{% block appHeader %}
+    <style>
+        body {
+            background: linear-gradient(rgba(20,20,20, .5), rgba(20,20,20, .5)), url("./views/app/images/bglog.jpg");
+        }
+        .panel {
+            border-radius: 25px;
+            background: linear-gradient(rgba(20,20,20, .3), rgba(20,20,20, .3));
+        }
+        a {
+            color: #ffffff;
+        }
+    </style>
+{% endblock %}
 {% block appBody %}
-<nav class="navbar navbar-default navbar-fixed-top">
-  <a class="navbar-brand" href="#">GetJob</a>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-4" style=" border-radius:10px">
-        <div class="card card-container" >
-        <h1 class="text-center" style="color:white;">Iniciar Sesion</h1>
-        
-       
-          <p id="profile-name" class="profile-name-card"></p>
-          <form class="form-signin bounce" id="login_form" method="POST">
-            <input type="rut" name="rut" class="form-control" placeholder="rut" autofocus="autofocus">
-            <input type="password" name="pass" class="form-control" placeholder="Password" autocomplete="autocomplete">
-            <div id="remember" class="checkbox">
-            
-            </div>
-            <button type="button" class="btn btn-lg btn-success btn-block btn-signin" id="login">INICIAR</button>
-            <button type="button" class="btn btn-lg btn-primary btn-block btn-signin" data-toggle="modal" data-target="#lostpass">REGISTRAR</button>
-          </form>
-          <!-- /form -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <a class="navbar-brand" href="#">GetJob</a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12"></div>
         </div>
-      </div>
-    </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 panel panel-default animated fadeIn" style=" border-radius:10px">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs pull-rigth">
+                        <li class="active">
+                            <a href="#tab_1-1" data-toggle="tab">Usuario</a>
+                        </li>
+                        <li>
+                            <a href="#tab_2-2" data-toggle="tab">Empresa</a>
+                        </li>
+                        <li class="pull-left header"></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active animated fadeIn" id="tab_1-1">
+                            <div class="card card-container">
+                                <h4 class="text-center animated fadeIn" style="color:white;">Usuario</h4>
+                                <h1 class="text-center" style="color:white;">Iniciar Sesion</h1>
+                                <p id="profile-name" class="profile-name-card"></p>
+                                <form class="form-signin bounce" id="login_form_user" method="POST">
+                                    <input type="rut" name="rut" class="form-control" placeholder="RUT" autofocus="autofocus">
+                                    <br>
+                                    <input type="password" name="pass" class="form-control" placeholder="Password" autocomplete="autocomplete">
+                                    <div id="remember" class="checkbox"></div>
+                                    <button type="button" class="btn btn-lg btn-success btn-block btn-signin" id="loginUser">Buscar Empleo</button>
+                                    <button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="registrarUser">Registrar Usuario</button>
+                                    <br>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane animated fadeIn" id="tab_2-2">
+                            <div class="card card-container">
+                                <h4 class="text-center animated fadeIn" style="color:white;">Empresa</h4>
+                                <h1 class="text-center" style="color:white;">Iniciar Sesion</h1>
+                                <p id="profile-name" class="profile-name-card"></p>
+                                <form class="form-signin bounce" id="login_form_empresa" method="POST">
+                                    <input type="rut" name="rut" class="form-control" placeholder="RUT" autofocus="autofocus">
+                                    <br>
+                                    <input type="password" name="pass" class="form-control" placeholder="Password" autocomplete="autocomplete">
+                                    <div id="remember" class="checkbox"></div>
+                                    <button type="button" class="btn btn-lg btn-success btn-block btn-signin" id="loginEmpresa">Buscar Trabajadores</button>
+                                    <button type="button" class="btn btn-lg btn-primary btn-block btn-signin" id="registrarEmpresa">Registrar Empresa</button>
+                                    <br>
+                                </form>
+                                <!-- /form -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- /card-container -->
-  </div>
-  <!-- /container -->
-  {% block appScript %}
-    <script src="views/app/js/login/login.js"></script>
-    <script src="views/app/js/main.js"></script>
-   
-  {% endblock %}
+            </div>
+        </div>
+
+        <!-- /card-container -->
+    </div>
+    <!-- /container -->
+    {% block appScript %}{% endblock %}
 
 {% endblock %}

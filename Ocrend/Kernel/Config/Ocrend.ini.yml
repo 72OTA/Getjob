@@ -1,6 +1,6 @@
-# This file is part of the Ocrend Framewok 2 package.
+# Este Archivo es parte del Framework Ocrend Moldeado Especialmente para esta StartUp(GetJob)
 #
-# (c) Ocrend Software <info@ocrend.com>
+# (C) <f.andradevalenzuela@gmail.com>
 #
 # For the full copyright and license information, please view the LICENS
 # file that was distributed with this source code.
@@ -35,8 +35,8 @@ framework:
 # Configuración del sitio
 site:
   name: GetJob.cl
-  author: Brayan Narváez
-  author_email: prinick@ocrend.com
+  author: Felipe Andrade
+  author_email: f.andradevalenzuela@gmail.com
   timezone: America/Santiago
   url: http://localhost/getjob/
   router:

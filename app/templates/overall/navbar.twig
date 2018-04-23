@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default navbar-expand-md navbar-fixed-top navbar-collapse">
+    <a class="navbar-brand" href="#">GetJob</a>
+    <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!-- <li class="active"> <a href="#">Menu Principal</a> </li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="eventos/" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Empleos
+                    </a>
+                    <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item " href="eventos/crear">Crear Empleo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="eventos/visualizar">Ver Empleo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="eventos/misEventos">Mis Empleo</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="empresa/" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Empresa </a> <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink"> <a class="dropdown-item " href="empresa/crear">Crear Empresa</a> <br> <a class="dropdown-item" href="empresa/visualizar">Ver Empresas</a> </div> </li> -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a onclick="verperfil({{user.id_user}});">Perfil</a>
+                </li>
+                <li>
+                    <a href="logout">Cerrar Sesion
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

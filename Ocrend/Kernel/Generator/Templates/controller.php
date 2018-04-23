@@ -25,7 +25,15 @@ use Ocrend\Kernel\Controllers\IControllers;
 class {{controller}} extends Controllers implements IControllers {
 
     public function __construct(IRouter $router) {
-        parent::__construct($router);   
+        parent::__construct($router,array(
+            'users_logged' => true
+        ));
+
+        //opcion correspondiente a menú
+        $op = array(0);
+        //remplazar vista a mostrar
+		    echo $this->template->render('carpeta/vistaTWIG', array('menu_op' => $op ));
+
         {{content}}
     }
 

@@ -1,53 +1,62 @@
 /**
  * Ajax action to api rest
-*/
-function login(){
+ */
+function login() {
   $.ajax({
-    type : "POST",
-    url : "api/login",
-    data : $('#login_form').serialize(),
-    success : function(json) {
-      if(json.success == 1) {
+    type: "POST",
+    url: "api/login",
+    data: $("#login_form_user").serialize(),
+    success: function(json) {
+      if (json.success == 1) {
         $.dialog({
-          title: 'Acceso a sistema',
-          type: 'green',
+          title: "Acceso a sistema",
+          type: "green",
           typeAnimated: true,
-          content: json.message,
+          content: json.message
         });
-        setTimeout(function(){
-            location.reload();
-        },1000);
-      }else{
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
+      } else {
         $.dialog({
-          title: 'Acceso a sistema',
-          type: 'orange',
+          title: "Acceso a sistema",
+          type: "orange",
           typeAnimated: true,
-          content: json.message,
+          content: json.message
         });
       }
     },
-    error : function(xhr, status) {
+    error: function(xhr, status) {
       $.dialog({
-        title: 'Acceso a sistema',
-        type: 'red',
+        title: "Acceso a sistema",
+        type: "red",
         typeAnimated: true,
-        content: xhr.responseText,
+        content: xhr.responseText
       });
     }
   });
 }
 
-
 /**
  * Events
  */
-$('#login').click(function(e) {
+$("#loginUser").click(function(e) {
   e.defaultPrevented;
   login();
 });
-$('#login_form').keypress(function(e) {
-    e.defaultPrevented;
-    if(e.which == 13) {
-        login();
-    }
+$("#login_form_user").keypress(function(e) {
+  e.defaultPrevented;
+  if (e.which == 13) {
+    login();
+  }
+});
+$("#loginEmpresa").click(function(e) {
+  e.defaultPrevented;
+  login();
+});
+$("#login_form_empresa").keypress(function(e) {
+  e.defaultPrevented;
+  if (e.which == 13) {
+    login();
+  }
 });

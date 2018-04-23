@@ -1,0 +1,36 @@
+{% extends 'overall/layout' %}
+    {% block appHeader %}
+     <style>
+body {
+   background: linear-gradient(
+                     rgba(20,20,20, .5), 
+                     rgba(20,20,20, .5)),
+                     url("./views/app/images/bgev.jpg");
+background-size: 100% 100%;
+   background-color: black;
+}
+.hpl:hover {
+    color: #ccffcc;
+    font-size: 60px;
+    transition: 0.4s all;
+}
+
+     </style>
+
+</script>
+    {% endblock %}
+{% block appBody %}
+<div class="row" >
+<h1 class="text-center animated zoomIn">Empresas</h1>
+    {% for d in empresa %}
+    <div class="col-md-12 auto-mx animated fadeInUp text-center h-100">
+      <div class="card" >
+        <div class="card-body">
+          <h3 class="card-title"><a href="" class="hpl">{{d.nombre}}</a></h3>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

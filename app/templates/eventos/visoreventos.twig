@@ -1,0 +1,42 @@
+{% extends 'overall/layout' %}
+{% block appHeader %}
+    <style>
+        body {
+            background: linear-gradient(rgba(20,20,20, .5), rgba(20,20,20, .5)), url("./views/app/images/bgev.jpg");
+            background-size: 100% 100%;
+            background-color: black;
+        }
+        .col-sm-4 {
+            border-radius: 25px;
+            background: linear-gradient(rgba(20,20,20, .5), rgba(20,20,20, .5));
+        }
+    </style>
+
+</script>
+{% endblock %}
+{% block appBody %}
+<div class="row">
+    <br>
+    {% for d in evento %}
+        <div class="col-sm-4 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Evento:
+                        {{d.nombre}}</h3>
+                    <h4 class="card-subtitle mb-2 text-muted">Personal:
+                        {{d.funcion}}</h4>
+                    <p class="card-text text-muted">Fecha:
+                        {{d.fecha}}</p>
+                    {% if d.fecha >= fecha %}
+                        <a href="#" class="btn btn-primary">TOMAR EMPLEO</a>
+                        <a href="eventos/editar_evento/{{ d.id }}" class="btn btn-success">MAS INFORMACIÓN</a>
+                    {% else %}
+                        <a href="" class="btn btn-danger">EMPLEO FINALIZADO</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

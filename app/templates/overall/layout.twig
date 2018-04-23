@@ -44,7 +44,10 @@
     <![endif]-->
   </head>
   <body>
-
+        {% block appHead %}
+        
+            {% include 'overall/navbar' %}
+        {% endblock %}
     {# Contenido real #}
     {% block appBody %}
       <!-- :) -->
@@ -65,7 +68,15 @@
 
     {# Footer #}
     {% block appFooter %}
-      <!-- :) -->
+        {% include 'overall/footer' %}
     {% endblock %}
+      {% block appScript %}
+
+  {% endblock %}
+    <script src="views/app/js/login/login.js"></script>
+    <script src="views/app/js/main.js"></script>
+    <script src="views/app/js/register/register.js"></script>
+    <script src="views/app/js/perfil/perfil.js"></script>
+    
   </body>
 </html>

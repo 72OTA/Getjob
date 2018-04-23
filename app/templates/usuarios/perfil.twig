@@ -1,0 +1,92 @@
+{% extends 'overall/layout' %}
+{% block appHeader %}
+    <style>
+        body {
+            background: linear-gradient(rgba(20,20,20, .5), rgba(20,20,20, .5)), url("./views/app/images/bglog.jpg");
+        }
+        .panel {
+            border-radius: 25px;
+            background: linear-gradient(rgba(20,20,20, .3), rgba(20,20,20, .3));
+        }
+        a {
+            color: #ffffff;
+        }
+    </style>
+{% endblock %}
+{% block appBody %}
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand text-center">Actualizar perfil</h3>
+            </div>
+        </header>
+        <main role="main" class="inner cover">
+            <h4>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <form id="actualizar_form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    RUT
+                                    <input type="rut" name="rut" class="form-control" value="{{user.rut}}" autofocus="autofocus" disabled="disabled">
+                                </div>
+                                <div class="col-md-6">
+                                    Nombre
+                                    <input type="text" name="name" class="form-control" value="{{user.name}}">
+                                </div>
+                                <div class="col-md-6">
+                                    Email
+                                    <input type="email" name="mail" class="form-control" value="{{user.email}}">
+                                </div>
+                                <div class="col-md-6">
+                                    Numero de telefono
+                                    <input type="text" name="n_telefono" class="form-control" value="{{user.n_telefono}}" placeholder="+569 8669 8886">
+                                </div>
+                                <div class="col-md-6">
+                                    Fecha de nacimiento
+                                    <input type="date" name="fecha_nacimiento" class="form-control" value="{{user.fecha_nacimiento}}">
+                                </div>
+                                <div class="col-md-6">
+                                    Comuna
+                                    <select class="form-control" name="comuna" id="comuna">
+                                        {% for d in comuna %}
+                                            {% if user.comuna == d.comuna %}
+                                                <option value="{{d.comuna}}" selected="selected">{{d.comuna}}</option>
+                                            {% else %}
+                                                <option value="{{d.comuna}}">{{d.comuna}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    Sexo
+                                    <select name="sexo" id="sexo" class="form-control">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    Tarjeta Bip
+                                    <input type="text" name="bip" class="form-control" value="{{user.bip}}" placeholder="555 5556 5544">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                                <input type="hidden" name="id" id="id" value="{{user.id_user}}">
+                                <button type="button" class="btn btn-lg btn-success  btn-signin" id="actualizar">Actualizar Datos</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-lg btn-primary  btn-signin" id="cambiar_pass">Cambiar Contraseña</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </h4>
+        </main>
+
+    </div>
+
+    {% block appScript %}{% endblock %}
+{% endblock %}
