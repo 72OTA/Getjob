@@ -1,11 +1,43 @@
 /**
  * Ajax action to api rest
  */
-function register() {
+function registerUser() {
   $.ajax({
     type: "POST",
-    url: "api/register",
-    data: $("#register_form").serialize(),
+    url: "api/registerUser",
+    data: $("#register_user_form").serialize(),
+    success: function(json) {
+      if (json.success == 1) {
+        $.alert({
+          typeAnimated: true,
+          icon: "glyphicon glyphicon-warning-sign",
+          type: "green",
+          title: "Registro!",
+          content: json.message
+        });
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
+      } else {
+        $.alert({
+          typeAnimated: true,
+          icon: "glyphicon glyphicon-warning-sign",
+          type: "red",
+          title: "Registro!",
+          content: json.message
+        });
+      }
+    },
+    error: function(/*xhr, status*/) {
+      alert("Ha ocurrido un problema.");
+    }
+  });
+}
+function registerEmpr() {
+  $.ajax({
+    type: "POST",
+    url: "api/registerEmpr",
+    data: $("#register_empr_form").serialize(),
     success: function(json) {
       if (json.success == 1) {
         $.alert({
@@ -37,27 +69,16 @@ function register() {
 /**
  * Events
  */
-$("#register").click(function(e) {
-  e.defaultPrevented;
-  register();
-});
-$("#register_form").keypress(function(e) {
-  e.defaultPrevented;
-  if (e.which == 13) {
-    register();
-  }
-});
 $("#registrarUser").click(function() {
   var form =
-    "<h4>" +
-    '<form id="register_form">' +
-    '<input type="rut" name="rut" class="form-control" placeholder="RUT" autofocus="autofocus">' +
-    '<input type="text" name="name" class="form-control" placeholder="Nombre" >' +
-    '<input type="email" name="mail" class="form-control" placeholder="Ejemplo@gmail.com" >' +
-    '<input type="password" name="pass" class="form-control" placeholder="Password" >' +
-    '<input type="password" name="pass_repeat" class="form-control" placeholder="re ingrese password" >' +
-    "</form>" +
-    "</h4>";
+    '<form id="register_user_form">' +
+    'RUT:<input type="rut" name="rut" class="form-control" placeholder="RUT" autofocus="autofocus">' +
+    'Nombre:<input type="text" name="name" class="form-control" placeholder="Nombre" >' +
+    'Email:<input type="email" name="mail" class="form-control" placeholder="Ejemplo@gmail.com" >' +
+    'Password:<input type="password" name="pass" class="form-control" placeholder="Password" >' +
+    'Repita su password:<input type="password" name="pass_repeat" class="form-control" placeholder="re ingrese password" >' +
+    '<input type="hidden" name="empr" value="0">' +
+    "</form>";
   $.confirm({
     icon: "glyphicon glyphicon-warning-sign",
     title: "Nuevo Usuario!",
@@ -65,14 +86,45 @@ $("#registrarUser").click(function() {
     type: "blue",
     buttons: {
       confirmar: {
-        text: "<h3>Registrar.</h3>",
+        text: "<h5>Registrar.</h5>",
         btnClass: "btn-blue",
         action: function() {
-          register();
+          registerUser();
         }
       },
       cancel: {
-        text: "<h3>Cancelar</h3>",
+        text: "<h5>Cancelar</h5>",
+        btnClass: "btn-red",
+        action: function() {}
+      }
+    }
+  });
+});
+$("#registrarEmpresa").click(function() {
+  var form =
+    '<form id="register_empr_form">' +
+    'RUT:<input type="rut" name="rut" class="form-control" placeholder="RUT" autofocus="autofocus">' +
+    'Nombre:<input type="text" name="name" class="form-control" placeholder="Nombre" >' +
+    'Email:<input type="email" name="mail" class="form-control" placeholder="Ejemplo@gmail.com" >' +
+    'Password:<input type="password" name="pass" class="form-control" placeholder="Password" >' +
+    'Repita su password:<input type="password" name="pass_repeat" class="form-control" placeholder="re ingrese password" >' +
+    '<input type="hidden" name="empr" value="1">' +
+    "</form>";
+  $.confirm({
+    icon: "glyphicon glyphicon-warning-sign",
+    title: "Nueva Empresa!",
+    content: form,
+    type: "green",
+    buttons: {
+      confirmar: {
+        text: "<h5>Registrar.</h5>",
+        btnClass: "btn-green",
+        action: function() {
+          registerEmpr();
+        }
+      },
+      cancel: {
+        text: "<h5>Cancelar</h5>",
         btnClass: "btn-red",
         action: function() {}
       }

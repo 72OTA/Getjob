@@ -1,82 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    {# Formato #}
-    {{ base_assets()|raw }}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <head>
+        {# Formato #}
+        {{ base_assets()|raw }}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    {# Estilos #}
-    <link href="views/app/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="views/app/css/framework.min.css" rel="stylesheet" />
-    <link href="views/app/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <script src="views/app/vendor/jquery/jquery.min.js"></script>
+        {# Estilos #}
+        <link href="views/app/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="views/app/css/framework.min.css" rel="stylesheet"/>
+        <link href="views/app/images/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+        <script src="views/app/vendor/jquery/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="views/app/vendor/node_modules/jquery-confirm/dist/jquery-confirm.min.css">
-    <link rel="stylesheet" href="views/app/vendor/node_modules/animate.css/animate.min.css">
-    <link rel="stylesheet" href="views/app/css/main.css">
-    {# Título #}
-    <title>{{ config.site.name }}</title>
-    
-    {# Extras en el header #}
-    {% block appHeader %}
-     <style>
-     iframe {
-   position: fixed;
-  right: 0; 
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  width: auto; 
-  height: auto;
-  z-index: -100;
-}
-{# body{
-  background-image:url("views/app/images/home.png")
-} #}
-     </style>
-    {% endblock %}
+        <link rel="stylesheet" href="views/app/vendor/node_modules/jquery-confirm/dist/jquery-confirm.min.css">
+        <link rel="stylesheet" href="views/app/vendor/node_modules/animate.css/animate.min.css">
+        <link rel="stylesheet" href="views/app/css/main.css">
+        {# Título #}
+        <title>{{ config.site.name }}</title>
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
+        {# Extras en el header #}
+        {% block appHeader %}
+            <style>
+                iframe {
+                    position: fixed;
+                    right: 0;
+                    bottom: 0;
+                    min-width: 100%;
+                    min-height: 100%;
+                    width: auto;
+                    height: auto;
+                    z-index: -100;
+                }
+                {
+                    # body {
+                        background-image: url("views/app/images/home.png");
+                    }
+                    #;
+                }
+            </style>
+        {% endblock %}
+
+        <!--[if lt IE 9]> <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script> <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script> <![endif]-->
+    </head>
+    <body>
         {% block appHead %}
-        
+
             {% include 'overall/navbar' %}
         {% endblock %}
-    {# Contenido real #}
-    {% block appBody %}
-      <!-- :) -->
-  
-    {% endblock %}
+        {# Contenido real #}
+        {% block appBody %}
+            <!-- :) -->
 
-    {# Carga de jQuery #}
-    {% if config.framework.debug %}
-      {# jQuery para ver errores de ajax vía consola, no eliminar #}
-      <script src="views/app/js/jdev.min.js"></script>
-    {% else %}
-      {# jQuery para su plantilla, este puede ser modificado a voluntad #}
-    {% endif %}
+        {% endblock %}
 
-    {# Scripts globales #}
-    <script src="views/app/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="views/app/vendor/node_modules/jquery-confirm/dist/jquery-confirm.min.js"></script>
+        {# Carga de jQuery #}
+        {% if config.framework.debug %}
+            {# jQuery para ver errores de ajax vía consola, no eliminar #}
+            <script src="views/app/js/jdev.min.js"></script>
+        {% else %}
+            {# jQuery para su plantilla, este puede ser modificado a voluntad #}
+        {% endif %}
 
-    {# Footer #}
-    {% block appFooter %}
-        {% include 'overall/footer' %}
-    {% endblock %}
-      {% block appScript %}
+        {# Scripts globales #}
+        <script src="views/app/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="views/app/vendor/node_modules/jquery-confirm/dist/jquery-confirm.min.js"></script>
 
-  {% endblock %}
-    <script src="views/app/js/login/login.js"></script>
-    <script src="views/app/js/main.js"></script>
-    <script src="views/app/js/register/register.js"></script>
-    <script src="views/app/js/perfil/perfil.js"></script>
-    
-  </body>
+        {# Footer #}
+        {% block appFooter %}
+            {% include 'overall/footer' %}
+        {% endblock %}
+        {% block appScript %}{% endblock %}
+        <script src="views/app/js/main.js"></script>
+        <script src="views/app/js/perfil/perfil.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDTa7GXHb_njikb7kr3CD3t8O2KXKBdB3k",
+                authDomain: "getjob-7e73b.firebaseapp.com",
+                databaseURL: "https://getjob-7e73b.firebaseio.com",
+                projectId: "getjob-7e73b",
+                storageBucket: "",
+                messagingSenderId: "436624347018"
+            };
+            firebase.initializeApp(config);
+        </script>
+    </body>
 </html>

@@ -58,6 +58,7 @@ abstract class Controllers {
       * @var array 
     */
     protected $user = array();
+    
 
     /**
       * Contiene información sobre el estado del usuario, si está o no conectado.

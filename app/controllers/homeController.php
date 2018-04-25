@@ -30,12 +30,15 @@ class homeController extends Controllers implements IControllers {
 
   if (!isset($this->user['id_user']))
       echo $this->template->render('home/home');
-  else{
+  elseif($this->user['rol'] == 0){
       //redirecciona a pagina de inicio de usuario
       echo $this->template->render('home/principal',array(
           'user'=> (new Model\Users)->getOwnerUser(),
       ));
-
+  }elseif ($this->user['rol'] == 1) {
+       echo $this->template->render('home/empresaprincipal',array(
+          'user'=> (new Model\Users)->getOwnerUser(),
+      ));
   }
   
     }

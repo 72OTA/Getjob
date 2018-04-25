@@ -19,20 +19,28 @@ use app\models as Model;
 $app->post('/login', function() use($app) {
     $u = new Model\Users;   
 
-    return $app->json($u->login());   
+    return $app->json($u->login(0));   
 });
+$app->post('/loginEmpresa', function() use($app) {
+    $u = new Model\Users;   
 
+    return $app->json($u->login(1));   
+});
 /**
     * Registro de un usuario
     *
     * @return json
 */
-$app->post('/register', function() use($app) {
+$app->post('/registerUser', function() use($app) {
     $u = new Model\Users; 
 
     return $app->json($u->register());   
 });
+$app->post('/registerEmpr', function() use($app) {
+    $u = new Model\Users; 
 
+    return $app->json($u->register());   
+});
 /**
     * Recuperar contraseña perdida
     *

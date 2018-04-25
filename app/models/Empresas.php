@@ -17,6 +17,8 @@ use Ocrend\Kernel\Models\IModels;
 use Ocrend\Kernel\Models\ModelsException;
 use Ocrend\Kernel\Models\Traits\DBModel;
 use Ocrend\Kernel\Router\IRouter;
+use Ocrend\Kernel\Helpers\Strings;
+use Ocrend\Kernel\Helpers\Emails;
 
 /**
  * Modelo Eventos
@@ -29,6 +31,7 @@ class Empresas extends Models implements IModels {
      * Característica para establecer conexión con base de datos.
      */
     use DBModel;
+    
 
     public function ver_empresa(): array {
             $user = (new Model\Users)->getOwnerUser();

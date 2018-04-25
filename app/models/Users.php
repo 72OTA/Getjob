@@ -136,9 +136,13 @@ class Users extends Models implements IModels {
      * @return bool true: Cuando el inicio de sesión es correcto
      *              false: Cuando el inicio de sesión no es correcto
      */
-    private function authentication(string $rut,string $pass) : bool {
+    private function authentication(string $rut,string $pass,string $log) : bool {
         $rut = $this->db->scape($rut);
-        $query = $this->db->select('id_user,pass','users',"rut='$rut'",'LIMIT 1');
+        if ($log == 0) {
+            $query = $this->db->select('id_user,pass','users',"rut='$rut' AND rol=0",'LIMIT 1');
+        }elseif ($log == 1) {
+            $query = $this->db->select('id_user,pass','users',"rut='$rut' AND rol=1",'LIMIT 1');
+        }
 
         # Incio de sesión con éxito
         if(false !== $query && Strings::chash($query[0]['pass'],$pass)) {
@@ -219,7 +223,7 @@ class Users extends Models implements IModels {
      *
      * @return array : Con información de éxito/falla al inicio de sesión.
      */
-    public function login() : array {
+    public function login(string $log) : array {
         try {
             global $http;
 
@@ -242,7 +246,7 @@ class Users extends Models implements IModels {
             $this->maximumAttempts($rut);
 
             # Autentificar
-            if ($this->authentication($rut, $pass)) {
+            if ($this->authentication($rut, $pass,$log)) {
                 return array('success' => 1, 'message' => 'Conectado con éxito.');
             }
 
@@ -268,6 +272,7 @@ class Users extends Models implements IModels {
             $mail = $http->request->get('mail');
             $pass = $http->request->get('pass');
             $pass_repeat = $http->request->get('pass_repeat');
+            $rol = $http->request->get('empr');
 
             # Verificar que no están vacíos
             if ($this->functions->e($name, $rut, $pass, $pass_repeat,$mail)) {
@@ -285,7 +290,8 @@ class Users extends Models implements IModels {
                 'name' => $name,
                 'rut' => $rut,
                 'email' => $mail,
-                'pass' => Strings::hash($pass)
+                'pass' => Strings::hash($pass),
+                'rol' => $rol
             ));
 
             # Iniciar sesión
